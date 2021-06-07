@@ -74,13 +74,11 @@ def submit():
     # If an invalid host is submitted
     if all(h["address"] != host for h in config["ovpn_hosts"]):
         print(f"Error: {host} is not defined in the configuration file")
-        # TODO: return error
-        return "Error"
+        return render_template("error.html", message=f"{host} is not defined in the configuration file.")
 
     # Set VPN status
     if set_status(host, enabled) != 0:
-        print("Error: Could not update VPN settings")
-        # TODO: return error
-        return "Error"
+        print("Error: Settings change failed")
+        return render_template("error.html")
 
-    return "Success"
+    return render_template("success.html")
