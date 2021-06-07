@@ -4,7 +4,7 @@ A Flask-based web app to switch OpenVPN servers on a Tomato-based router. Design
 
 ## Prerequisites
 
-Epsilon requires Python 3.9 or later and [Poetry](https://python-poetry.org).
+Epsilon requires Python 3.9 or later and [Poetry](https://python-poetry.org). It also requires SSH to be set up and in your PATH.
 
 ## Setup
 
