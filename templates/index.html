@@ -8,7 +8,7 @@
         <!-- TODO: Get selected server via SSH -->
         {% for host in hosts %}
         <div class="form__host">
-            <input id="host-{{ host['address'] }}" type="radio" name="host" value="{{ host['address'] }}">
+            <input id="host-{{ host['address'] }}" type="radio" name="host" value="{{ host['address'] }}" required>
             <label for="host-{{ host['address'] }}">{{ host["name"] }} ({{ host["address"] }})</label>
         </div>
         {% endfor %}
@@ -17,10 +17,10 @@
         <legend>VPN status</legend>
         <div class="form__status-value">
             <!-- TODO: Get current status via SSH -->
-            <input id="enabled-false" type="radio" name="enabled" value="Off" checked>
+            <input id="enabled-false" type="radio" name="enabled" value="Off" required checked>
             <label for="enabled-false">Off</label>
 
-            <input id="enabled-true" type="radio" name="enabled" value="On">
+            <input id="enabled-true" type="radio" name="enabled" value="On" required>
             <label for="enabled-true">On</label>
         </div>
     </fieldset>
