@@ -57,7 +57,7 @@ def submit():
     # Get form data
     data = request.form
     host = data.get("host")
-    enabled = data.get("enabled") == "On"
+    enabled = data.get("enabled") == "on"
 
     # If an invalid host is submitted
     if all(h["address"] != host for h in config["ovpn_hosts"]):
