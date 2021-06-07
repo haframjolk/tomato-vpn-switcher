@@ -2,7 +2,7 @@
 {% block header %}Tomato VPN Switcher{% endblock %}
 {% block content %}
 
-<form id="vpnform" class="form" method="POST" action="/set_host">
+<form id="vpnform" class="form" method="POST" action="/submit">
     <fieldset class="form__hosts">
         <legend>Hosts</legend>
         {% for host in hosts %}
