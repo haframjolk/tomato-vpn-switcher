@@ -47,9 +47,31 @@ def set_status(address: str, enabled: bool):
                                 service vpnclient{config['ovpn_client_no']} {'start' if enabled else 'stop'}""")
 
 
+def get_ssh_output(command: str):
+    """Runs the specified command via SSH and returns its output as a string"""
+    out = subprocess.check_output(["ssh", "-l", config["ssh_user"], config["ssh_host"], command])
+    return out.decode().strip()
+
+
+def get_status():
+    """Returns the currently selected VPN server's address and whether or not the client is running"""
+    address, status = get_ssh_output(f"""nvram get vpn_client{config['ovpn_client_no']}_addr;
+                                         if [ -f /etc/openvpn/vpnclient{config['ovpn_client_no']} ]
+                                         then
+                                             echo 'on'
+                                         else
+                                             echo 'off'
+                                         fi""").split("\n")
+    return {
+        "server": address,
+        "enabled": status == "on",
+    }
+
+
 @app.route("/")
 def index():
-    return render_template("index.html", hosts=config["ovpn_hosts"])
+    status = get_status()
+    return render_template("index.html", hosts=config["ovpn_hosts"], status=status)
 
 
 @app.route("/submit", methods=["POST"])
