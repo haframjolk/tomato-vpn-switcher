@@ -4,12 +4,56 @@
     "ovpn_client_no": "1",
     "ovpn_hosts": [
         {
-            "name": "United Kingdom",
-            "address": "uk2071.nordvpn.com"
+            "name": "Australia",
+            "address": "au650.nordvpn.com"
+        },
+        {
+            "name": "Canada",
+            "address": "ca958.nordvpn.com"
+        },
+        {
+            "name": "Denmark",
+            "address": "dk203.nordvpn.com"
+        },
+        {
+            "name": "Finland",
+            "address": "fi176.nordvpn.com"
+        },
+        {
+            "name": "France",
+            "address": "fr653.nordvpn.com"
+        },
+        {
+            "name": "Germany",
+            "address": "de1001.nordvpn.com"
         },
         {
             "name": "Iceland",
             "address": "is61.nordvpn.com"
+        },
+        {
+            "name": "Italy",
+            "address": "it153.nordvpn.com"
+        },
+        {
+            "name": "Japan",
+            "address": "jp519.nordvpn.com"
+        },
+        {
+            "name": "Netherlands",
+            "address": "nl849.nordvpn.com"
+        },
+        {
+            "name": "Norway",
+            "address": "no182.nordvpn.com"
+        },
+        {
+            "name": "Sweden",
+            "address": "se425.nordvpn.com"
+        },
+        {
+            "name": "United Kingdom",
+            "address": "uk2071.nordvpn.com"
         },
         {
             "name": "United States",
