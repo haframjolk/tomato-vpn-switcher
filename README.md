@@ -16,7 +16,7 @@ poetry install
 
 ## Configuration
 
-This program is configured using a JSON file placed in the repository root called `config.json`. Copy the included `config.example.json` and change the values to match your setup. Make sure to do all the required VPN setup on your router, through the web interface, as this program only switches the server address. This program does not currently support password authentication for SSH, use public key authentication instead.
+This program is configured using a JSON file placed in the repository root called `config.json`. Copy the included `config.example.json` and change the values to match your setup. Make sure to do all the required VPN setup on your router, through the web interface, as this program only switches the server address. This program does not currently support password authentication for SSH, use public key authentication instead. Do note that by default, Tomato limits the number of allowed SSH connection attempts to 3 every 60 seconds, which can cause problems with this program. I recommend disabling the limit altogether.
 
 ## Running
 
