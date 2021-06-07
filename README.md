@@ -24,7 +24,7 @@ Elections are configured using a JSON file placed in the repository root called 
 
 ```sh
 poetry shell
-flask run
+FLASK_ENV=development flask run
 ```
 
 ### Production
