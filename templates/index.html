@@ -2,4 +2,33 @@
 {% block header %}Tomato VPN Switcher{% endblock %}
 {% block content %}
 
+<form id="vpnform" class="form" method="POST" action="/set_host">
+    <fieldset class="form__hosts">
+        <legend>Hosts</legend>
+        {% for host in hosts %}
+        <div class="form__host">
+            <input id="host-{{ host['address'] }}" type="radio" name="host" value="{{ host['address'] }}">
+            <label for="host-{{ host['address'] }}">{{ host["name"] }} ({{ host["address"] }})</label>
+        </div>
+        {% endfor %}
+    </fieldset>
+    <fieldset class="form__status">
+        <legend>VPN status</legend>
+        <div class="form__status-value">
+            <!-- TODO: Get current status via SSH -->
+            <input id="enabled-false" type="radio" name="enabled" value="Off" checked>
+            <label for="enabled-false">Off</label>
+
+            <input id="enabled-true" type="radio" name="enabled" value="On">
+            <label for="enabled-true">On</label>
+        </div>
+    </fieldset>
+
+    <button class="button button--submit">Save</button>
+</form>
+
+<form id="vpnstatus" class="vpnstatus" method="POST" action="/set_vpn_status">
+
+</form>
+
 {% endblock %}

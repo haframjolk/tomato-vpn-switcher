@@ -43,4 +43,4 @@ def select_server(address: str):
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html", hosts=config["ovpn_hosts"])
