@@ -16,7 +16,7 @@ poetry install
 
 ## Configuration
 
-Elections are configured using a JSON file placed in the repository root called `config.json`. Copy the included `config.example.json` and change the values to match your setup.
+This program is configured using a JSON file placed in the repository root called `config.json`. Copy the included `config.example.json` and change the values to match your setup. Make sure to do all the required VPN setup on your router, through the web interface, as this program only switches the server address. This program does not currently support password authentication for SSH, use public key authentication instead.
 
 ## Running
 
