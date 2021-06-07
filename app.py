@@ -42,6 +42,7 @@ def get_ssh_output(command: str):
 
 def get_status():
     """Returns the currently selected VPN server's address and whether or not the client is running"""
+    # If /etc/openvpn/vpnclient{n} exists, the client is running
     address, status = get_ssh_output(f"""nvram get vpn_client{config['ovpn_client_no']}_addr;
                                          if [ -f /etc/openvpn/vpnclient{config['ovpn_client_no']} ]
                                          then
@@ -49,10 +50,12 @@ def get_status():
                                          else
                                              echo 'off'
                                          fi""").split("\n")
-    return {
+    # Return the data as a dict
+    out = {
         "server": address,
         "enabled": status == "on",
     }
+    return out
 
 
 @app.route("/")
