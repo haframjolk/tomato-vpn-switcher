@@ -1,12 +1,13 @@
 [tool.poetry]
 name = "tomato-vpn-switcher"
 version = "0.1.0"
-description = "A web service to switch OpenVPN servers on a Tomato-based router"
+description = "A Flask-based web app to switch OpenVPN servers on a Tomato-based router"
 authors = ["Reyn Alpha <reynalpha@outlook.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
 Flask = "^2.0.1"
+waitress = "^2.0.0"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.9.2"
