@@ -1,7 +1,7 @@
 {
     "ssh_host": "my_router",
     "ssh_user": "root",
-    "ovpn_service": "vpnclient1",
+    "ovpn_client_no": "1",
     "ovpn_hosts": [
         {
             "name": "United Kingdom",

@@ -5,6 +5,7 @@
 <form id="vpnform" class="form" method="POST" action="/submit">
     <fieldset class="form__hosts">
         <legend>Hosts</legend>
+        <!-- TODO: Get selected server via SSH -->
         {% for host in hosts %}
         <div class="form__host">
             <input id="host-{{ host['address'] }}" type="radio" name="host" value="{{ host['address'] }}">

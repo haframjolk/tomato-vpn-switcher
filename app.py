@@ -20,25 +20,31 @@ init()
 app = Flask(__name__)
 
 
-def send_ssh_command(command: list[str]):
+def send_ssh_command(command: str):
     """Runs the specified command on the configured SSH server, returns the exit code"""
-    code = subprocess.call(["ssh", "-l", config["ssh_user"], config["ssh_host"], *command])
+    code = subprocess.call(["ssh", "-l", config["ssh_user"], config["ssh_host"], command])
     return code
 
 
 def start_vpn():
     """Starts the VPN, returns the exit code"""
-    return send_ssh_command(["service", config["ovpn_service"], "start"])
+    return send_ssh_command(f"service vpnclient{config['ovpn_client_no']} start")
 
 
 def stop_vpn():
     """Stops the VPN, returns the exit code"""
-    return send_ssh_command(["service", config["ovpn_service"], "stop"])
+    return send_ssh_command(f"service vpnclient{config['ovpn_client_no']} stop")
 
 
 def select_server(address: str):
     """Selects the specified address as the VPN server, returns the exit code"""
-    return send_ssh_command(["set", f"vpn_client1_addr={address}"])
+    return send_ssh_command(f"nvram set vpn_client{config['ovpn_client_no']}_addr={address}")
+
+
+def set_status(address: str, enabled: bool):
+    """Sets the VPN server address and enabled state, returns the exit code"""
+    return send_ssh_command(f"""nvram set vpn_client{config['ovpn_client_no']}_addr={address} &&
+                                service vpnclient{config['ovpn_client_no']} {'start' if enabled else 'stop'}""")
 
 
 @app.route("/")
@@ -54,27 +60,15 @@ def submit():
     enabled = data.get("enabled") == "On"
 
     # If an invalid host is submitted
-    if host not in config["ovpn_hosts"]:
+    if all(h["address"] != host for h in config["ovpn_hosts"]):
         print(f"Error: {host} is not defined in the configuration file")
         # TODO: return error
-        return
+        return "Error"
 
-    # Select server
-    if not select_server(host):
-        print(f"Error: Could not set server to {host}")
+    # Set VPN status
+    if set_status(host, enabled) != 0:
+        print("Error: Could not update VPN settings")
         # TODO: return error
-        return
+        return "Error"
 
-    # Start or stop VPN depdending on choice
-    if enabled:
-        if not start_vpn():
-            print("Error: Could not start VPN")
-            # TODO: return error
-            return
-    else:
-        if not stop_vpn():
-            print("Error: Could not stop VPN")
-            # TODO: return error
-            return
-
-    return "success"
+    return "Success"
