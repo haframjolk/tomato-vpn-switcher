@@ -26,25 +26,12 @@ def send_ssh_command(command: str):
     return code
 
 
-def start_vpn():
-    """Starts the VPN, returns the exit code"""
-    return send_ssh_command(f"service vpnclient{config['ovpn_client_no']} start")
-
-
-def stop_vpn():
-    """Stops the VPN, returns the exit code"""
-    return send_ssh_command(f"service vpnclient{config['ovpn_client_no']} stop")
-
-
-def select_server(address: str):
-    """Selects the specified address as the VPN server, returns the exit code"""
-    return send_ssh_command(f"nvram set vpn_client{config['ovpn_client_no']}_addr={address}")
-
-
 def set_status(address: str, enabled: bool):
     """Sets the VPN server address and enabled state, returns the exit code"""
-    return send_ssh_command(f"""nvram set vpn_client{config['ovpn_client_no']}_addr={address} &&
-                                service vpnclient{config['ovpn_client_no']} {'start' if enabled else 'stop'}""")
+    # The client is restarted if desired on, to make sure the server address is changed
+    # Otherwise, it is stopped
+    return send_ssh_command(f"""nvram set vpn_client{config['ovpn_client_no']}_addr={address}
+                                service vpnclient{config['ovpn_client_no']} {'restart' if enabled else 'stop'}""")
 
 
 def get_ssh_output(command: str):
