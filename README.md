@@ -1,5 +1,7 @@
 # Tomato VPN Switcher
 
+![Tomato VPN Switcher logo](app-icon.png)
+
 A Flask-based web app to switch OpenVPN servers on a Tomato-based router. Designed and tested with NordVPN in mind.
 
 ## Prerequisites
@@ -33,3 +35,35 @@ FLASK_ENV=development flask run
 poetry shell
 ./serve.py
 ```
+
+### GUI mode
+
+Tomato VPN Switcher has a GUI mode which uses pywebview to run the Flask app and display the interface in a web view, stopping the server when the web view is closed.
+
+```sh
+poetry shell
+./gui.py
+```
+
+## Bundling
+
+Tomato VPN Switcher can be bundled into an executable using cx_Freeze. The bundled executable will use the aforementioned GUI mode.
+
+```sh
+poetry shell
+python setup.py [MODE]
+```
+
+Replace `[MODE]` with your preferred mode. Note that builds will only be created for the operating system and platform that they are created on.
+
+### cx_Freeze modes
+
+| Mode      | Platform              | Output          |
+| --------- | --------------------- | --------------- |
+| build     | Any                   | Folder          |
+| bdist_mac | macOS                 | .app bundle     |
+| bdist_dmg | macOS                 | .dmg disk image |
+| bdist_msi | Windows               | MSI installer   |
+| bdist_rpm | Linux (Red Hat-based) | RPM package     |
+
+If the build is successful, you will find the output in either the `dist/` or `build/` directory, depending on the mode chosen.
