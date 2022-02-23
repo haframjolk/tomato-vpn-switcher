@@ -25,15 +25,13 @@ This program is configured using a JSON file placed in the repository root calle
 ### Development
 
 ```sh
-poetry shell
-FLASK_ENV=development flask run
+FLASK_ENV=development poetry run flask run
 ```
 
 ### Production
 
 ```sh
-poetry shell
-./serve.py
+poetry run python serve.py
 ```
 
 ### GUI mode
@@ -41,8 +39,7 @@ poetry shell
 Tomato VPN Switcher has a GUI mode which uses pywebview to run the Flask app and display the interface in a web view, stopping the server when the web view is closed.
 
 ```sh
-poetry shell
-./gui.py
+poetry run python gui.py
 ```
 
 ## Bundling
@@ -50,8 +47,7 @@ poetry shell
 Tomato VPN Switcher can be bundled into an executable using cx_Freeze. The bundled executable will use the aforementioned GUI mode.
 
 ```sh
-poetry shell
-python setup.py [MODE]
+poetry run python setup.py [MODE]
 ```
 
 Replace `[MODE]` with your preferred mode. Note that builds will only be created for the operating system and platform that they are created on.
