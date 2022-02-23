@@ -1,6 +1,6 @@
 # Tomato VPN Switcher
 
-![Tomato VPN Switcher logo](app-icon.png)
+![Tomato VPN Switcher logo](icon-512.png)
 
 A Flask-based web app to switch OpenVPN servers on a Tomato-based router. Designed and tested with NordVPN in mind.
 
