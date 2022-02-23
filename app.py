@@ -1,23 +1,32 @@
-#!/usr/bin/env python3
-
 from flask import Flask, render_template, request
 import json
 import subprocess
+import sys
+import os
 
 
 def init():
     """Initialize program data"""
     global config
+    global datadir
+
+    datadir = ""
+    if getattr(sys, "frozen", False):
+        datadir = os.path.dirname(sys.executable)
+    else:
+        datadir = os.path.dirname(__file__)
 
     # Read config
-    with open("config.json") as f:
+    with open(os.path.join(datadir, "config.json")) as f:
         config = json.load(f)
 
 
 # Initialize data
 init()
 # Initialize app
-app = Flask(__name__)
+app = Flask(__name__,
+            template_folder=os.path.join(datadir, "templates"),
+            static_folder=os.path.join(datadir, "static"))
 
 
 def send_ssh_command(command: str):
