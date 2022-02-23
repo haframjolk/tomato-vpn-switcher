@@ -26,7 +26,9 @@ def init():
 # Initialize data
 init()
 # Initialize app
-app = Flask(__name__, template_folder=os.path.join(datadir, "templates"))
+app = Flask(__name__,
+            template_folder=os.path.join(datadir, "templates"),
+            static_folder=os.path.join(datadir, "static"))
 
 
 def send_ssh_command(command: str):
